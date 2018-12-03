@@ -59,16 +59,7 @@ class InteractiveRecord
   def self.find_by(attribute)
     key = attribute.keys.first
     value = attribute.values.first
-
-    begin
     if value.class == Fixnum
-      begin
-        value.to_i
-      rescue
-        puts "not successful"
-      ensure
-        puts "successful"
-      end
       formatted_value = value
     else
       formatted_value = "'#{value}'"
@@ -76,6 +67,4 @@ class InteractiveRecord
     sql = "SELECT * FROM #{self.table_name} WHERE #{key} = #{formatted_value}"
     DB[:conn].execute(sql)
   end
-
-
 end
